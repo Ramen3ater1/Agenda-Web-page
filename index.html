@@ -11,6 +11,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.form-message { margin-top: 1rem; font-size: 0.85rem; display: none; }
+			.form-message.success { display: block; color: #5cb85c; }
+			.form-message.error { display: block; color: #d9534f; }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -78,7 +83,8 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
-								<form method="post" action="https://formspree.io/f/mqeodqgy">
+								<form method="post" action="https://formspree.io/f/mqeodqgy" id="contact-form">
+									<input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
@@ -97,11 +103,20 @@
 										<li><input type="submit" value="Send Message" class="primary" /></li>
 										<li><input type="reset" value="Reset" /></li>
 									</ul>
+									<div class="form-message" id="contact-form-message"></div>
 								</form>
                 <h3> Subscribe to Agenda and get updated</h3>
-                <form action="https://formspree.io/f/mwvjndaw" method="POST">
-                  <input type="email" name="email" placeholder="Your Email" required>
-                  <button type="submit">Subscribe</button>
+                <form action="https://formspree.io/f/mwvjndaw" method="POST" id="subscribe-form">
+                  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+                  <div class="fields">
+                    <div class="field">
+                      <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                  </div>
+                  <ul class="actions">
+                    <li><button type="submit" class="button primary">Subscribe</button></li>
+                  </ul>
+                  <div class="form-message" id="subscribe-form-message"></div>
                 </form>
 								<ul class="icons">
 									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>

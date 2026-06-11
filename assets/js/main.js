@@ -385,7 +385,39 @@
 
 			}
 
-		// Initialize.
+		// Form AJAX submission.
+			$('#contact-form, #subscribe-form').on('submit', function(e) {
+				e.preventDefault();
+
+				var $form = $(this);
+				var $message = $form.find('.form-message');
+				var $button = $form.find('[type="submit"]');
+
+				$message.removeClass('success error').text('Sending...').show();
+				$button.prop('disabled', true);
+
+				$.ajax({
+					url: $form.attr('action'),
+					method: 'POST',
+					data: $form.serialize(),
+					dataType: 'json',
+					headers: { 'Accept': 'application/json' },
+					success: function() {
+						$message.addClass('success').text('Thank you! Your submission has been received.');
+						$form.trigger('reset');
+						$button.prop('disabled', false);
+					},
+					error: function(xhr) {
+						var msg = 'There was a problem. Please try again.';
+						try {
+							var resp = JSON.parse(xhr.responseText);
+							if (resp.error) msg = resp.error;
+						} catch (e) {}
+						$message.addClass('error').text(msg);
+						$button.prop('disabled', false);
+					}
+				});
+			});
 
 			// Hide main, articles.
 				$main.hide();
